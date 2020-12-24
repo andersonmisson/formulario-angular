@@ -15,9 +15,9 @@
     <div class="form-group">
       <label class="form-control-label">Profissão</label>
       <select class="form-control" name="profissao" ngModel>
-        <option value="">Selecione</option>
-        <option>Engenheiro</option>
-        <option>Dentista</option>
+        <option value="">Selecione</option> <!-- Usando um laço FOR para o ver o array profissoes[] -->
+        <option *ngFor="let profissao of profissoes"
+          [value]="profissao">{{ profissao }}</option>
       </select>
     </div>
 
