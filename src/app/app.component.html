@@ -9,25 +9,32 @@
     <div class="form-group">
       <label class="form-control-label">Nome</label>
       <input type="text" class="form-control" name="primeiroNome"
-        [(ngModel)]="cliente.nome" required minlength="10">
+        [(ngModel)]="cliente.nome" required minlength="10" #nome="ngModel">
+
+      <div *ngIf="nome.hasError('required')">Informe um nome</div>
+      <div *ngIf="nome.hasError('minlength')">O nome deve ser completo</div>
     </div> <!-- REQUIRED - Para ser um campo obrigatorio -->
            <!-- MINLENGHT - Minimo 10 letras -->
 
     <div class="form-group">
       <label class="form-control-label">E-mail</label>
       <input type="text" class="form-control" name="emailAddress"
-        [(ngModel)]="cliente.email" required email>
+        [(ngModel)]="cliente.email" required email #email="ngModel">
+
+      <div *ngIf="email.invalid">Informe um e-mail válido</div>
     </div><!-- REQUIRED - Para ser um campo obrigatorio -->
           <!-- EMAIL - Configuração para o email, ter @ por exemplo -->
 
     <div class="form-group">
       <label class="form-control-label">Profissão</label>
       <select class="form-control" name="profissao"
-          [(ngModel)]="cliente.profissao" required>
+          [(ngModel)]="cliente.profissao" required #profissao="ngModel">
         <option value="">Selecione</option> <!-- Usando um laço FOR para o ver o array profissoes[] -->
         <option *ngFor="let profissao of profissoes"
           [value]="profissao">{{ profissao }}</option>
       </select>
+
+      <div *ngIf="profissao.invalid">Informe uma profissão</div>
     </div><!-- REQUIRED - Para ser um campo obrigatorio -->
 
     <button type="submit" class="btn btn-primary"
