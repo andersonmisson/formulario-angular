@@ -2,7 +2,7 @@ import { NgForm } from '@angular/forms';
 import { Component } from '@angular/core';
 
 class Cliente {
-  nome: string;
+  nome: string; // asim ele fica na opção UNDEFINED, assim que der reset, ele fica vazio
   email: string;
   profissao = '';
 }
@@ -25,5 +25,7 @@ export class AppComponent {
 
     console.log(form);
     // console.log(this.cliente);
+
+    form.reset({ primeiroNome: 'Sebastião', profissao: '' });
   }
 }
