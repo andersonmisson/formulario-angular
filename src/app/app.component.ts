@@ -1,6 +1,11 @@
 import { NgForm } from '@angular/forms';
 import { Component } from '@angular/core';
 
+class Cliente {
+  nome: string;
+  email: string;
+  profissao = '';
+}
 
 @Component({
   selector: 'app-root',
@@ -10,12 +15,15 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'formulario-angular';
 
-  profissoes = ['Programador', 'Empresário', 'Outra', 'Teste'];
-  profissao = 'Teste'; // Esse é o NgModel, valor padrão que vai aparecer no OPTIONS
+  cliente = new Cliente();
+  profissoes = ['Programador', 'Empresário', 'Outra'];
 
   salvar(form: NgForm) {
-    console.log(this.profissao);
+    //this.cliente.nome = form.value.primeiroNome;
+    //this.cliente.email = form.value.emailAddress;
+    //this.cliente.profissao = form.value.profissao;
 
-    console.log(form.value.profissao);
+    console.log(form.value);
+    console.log(this.cliente);
   }
 }
