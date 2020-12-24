@@ -1,6 +1,6 @@
 <div class="container">
 
-  <div *ngIf="usuarioForm.invalid" class="alert alert-danger">
+  <div *ngIf="usuarioForm.invalid && usuarioForm.dirty" class="alert alert-danger">
     Preencha todos os campos corretamente.
   </div>
 
@@ -11,8 +11,12 @@
       <input type="text" class="form-control" name="primeiroNome"
         [(ngModel)]="cliente.nome" required minlength="10" #nome="ngModel">
 
-      <div *ngIf="nome.hasError('required')">Informe um nome</div>
-      <div *ngIf="nome.hasError('minlength')">O nome deve ser completo</div>
+        <!-- Touched: {{ nome.touched }}<br>  Se você TOCAR em um campo uma vez, fica TRUE -->
+        <!-- Pristine: {{ nome.pristine }} <br> Contrario de DIRTY, Se nunca foi alterado, fica TRUE -->
+        <!-- Dirty: {{ nome.dirty }}  Se você escrever alguma coisa no campo, ele fica true-->
+
+      <div *ngIf="nome.hasError('required') && nome.touched">Informe um nome</div>
+      <div *ngIf="nome.hasError('minlength') && nome.touched">O nome deve ser completo</div>
     </div> <!-- REQUIRED - Para ser um campo obrigatorio -->
            <!-- MINLENGHT - Minimo 10 letras -->
 
@@ -21,7 +25,7 @@
       <input type="text" class="form-control" name="emailAddress"
         [(ngModel)]="cliente.email" required email #email="ngModel">
 
-      <div *ngIf="email.invalid">Informe um e-mail válido</div>
+      <div *ngIf="email.invalid && email.touched">Informe um e-mail válido</div>
     </div><!-- REQUIRED - Para ser um campo obrigatorio -->
           <!-- EMAIL - Configuração para o email, ter @ por exemplo -->
 
@@ -34,7 +38,7 @@
           [value]="profissao">{{ profissao }}</option>
       </select>
 
-      <div *ngIf="profissao.invalid">Informe uma profissão</div>
+      <div *ngIf="profissao.invalid && profissao.touched">Informe uma profissão</div>
     </div><!-- REQUIRED - Para ser um campo obrigatorio -->
 
     <button type="submit" class="btn btn-primary"
