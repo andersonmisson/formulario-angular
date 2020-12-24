@@ -1,10 +1,11 @@
 <div class="container">
 
-  {{ cliente | json }}
-  {{ usuarioForm.valid }} <!-- Se preencher todos os campos, fica TRUE, senão FALSE-->
+  <div *ngIf="usuarioForm.invalid" class="alert alert-danger">
+    Preencha todos os campos corretamente.
+  </div>
 
   <!-- #usuarioForm variavel para o template-->
-  <form #usuarioForm="ngForm" (ngSubmit)="salvar(usuarioForm)">
+  <form autocomplete="off" #usuarioForm="ngForm" (ngSubmit)="salvar(usuarioForm)">
     <div class="form-group">
       <label class="form-control-label">Nome</label>
       <input type="text" class="form-control" name="primeiroNome"
@@ -29,7 +30,8 @@
       </select>
     </div><!-- REQUIRED - Para ser um campo obrigatorio -->
 
-    <button type="submit" class="btn btn-primary">Salvar</button>
+    <button type="submit" class="btn btn-primary"
+      [disabled]="!usuarioForm.valid">Salvar</button>
   </form>
 
 </div>
