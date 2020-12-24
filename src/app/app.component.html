@@ -1,30 +1,33 @@
 <div class="container">
 
   {{ cliente | json }}
+  {{ usuarioForm.valid }} <!-- Se preencher todos os campos, fica TRUE, senão FALSE-->
 
   <!-- #usuarioForm variavel para o template-->
   <form #usuarioForm="ngForm" (ngSubmit)="salvar(usuarioForm)">
     <div class="form-group">
       <label class="form-control-label">Nome</label>
       <input type="text" class="form-control" name="primeiroNome"
-        [(ngModel)]="cliente.nome">
-    </div>
+        [(ngModel)]="cliente.nome" required minlength="10">
+    </div> <!-- REQUIRED - Para ser um campo obrigatorio -->
+           <!-- MINLENGHT - Minimo 10 letras -->
 
     <div class="form-group">
       <label class="form-control-label">E-mail</label>
       <input type="text" class="form-control" name="emailAddress"
-        [(ngModel)]="cliente.email">
-    </div>
+        [(ngModel)]="cliente.email" required email>
+    </div><!-- REQUIRED - Para ser um campo obrigatorio -->
+          <!-- EMAIL - Configuração para o email, ter @ por exemplo -->
 
     <div class="form-group">
       <label class="form-control-label">Profissão</label>
       <select class="form-control" name="profissao"
-          [(ngModel)]="cliente.profissao">
+          [(ngModel)]="cliente.profissao" required>
         <option value="">Selecione</option> <!-- Usando um laço FOR para o ver o array profissoes[] -->
         <option *ngFor="let profissao of profissoes"
           [value]="profissao">{{ profissao }}</option>
       </select>
-    </div>
+    </div><!-- REQUIRED - Para ser um campo obrigatorio -->
 
     <button type="submit" class="btn btn-primary">Salvar</button>
   </form>
